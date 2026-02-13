@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prince Mansueto Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+
+    /* ---------- ANIMATED GRADIENT BACKGROUND ---------- */
+    body {
+      background: linear-gradient(-45deg, #3e5b7f, #1c3a4f, #1f4e5a, #143b4b, #0b293f, #1a2f3c, #0d2a33);
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+      color: #eef7fc;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0 1rem 2rem;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 0%; }
+      25% { background-position: 50% 50%; }
+      50% { background-position: 100% 100%; }
+      75% { background-position: 50% 50%; }
+      100% { background-position: 0% 0%; }
+    }
+
+    /* ----- FLOATING NAV (fully responsive, consistent) ----- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.7rem 2rem;
+      background: rgba(10, 25, 35, 0.75);
+      backdrop-filter: blur(18px) saturate(200%);
+      -webkit-backdrop-filter: blur(18px) saturate(200%);
+      border: 1px solid rgba(0, 230, 230, 0.25);
+      border-radius: 3rem;
+      box-shadow: 0 18px 35px -12px #030f1a, 0 0 0 1px rgba(0, 255, 255, 0.1) inset;
+      max-width: 1300px;
+      margin: 1.2rem auto 2rem auto;
+      position: sticky;
+      top: 16px;
+      z-index: 999;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #e0f4ff;
+      padding: 0.5rem 1.2rem;
+      border-radius: 2.5rem;
+      font-weight: 500;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 1rem;
+      white-space: nowrap;
+    }
+
+    nav a:hover {
+      background: rgba(0, 210, 210, 0.3);
+      border-color: rgba(0, 240, 240, 0.7);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 18px -10px #1b6b6b;
+      color: white;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        gap: 0.7rem;
+        padding: 0.9rem 1.2rem;
+        border-radius: 2.5rem;
+      }
+      nav ul {
+        justify-content: center;
+        width: 100%;
+      }
+      nav a {
+        padding: 0.4rem 1rem;
+        font-size: 0.95rem;
+      }
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 2rem 2.5rem;
+      flex-wrap: wrap;
+      gap: 3rem;
+      background: rgba(15, 30, 40, 0.4);
+      border-radius: 4rem;
+      backdrop-filter: blur(8px);
+      margin: 2rem 0 2.5rem;
+      border: 1px solid rgba(0, 220, 220, 0.15);
+      animation: fadeSlideUp 0.8s ease-out;
+    }
+
+    .hero-left {
+      flex: 1 1 300px;
+    }
+
+    .hero h2 {
+      font-size: 3.2rem;
+      font-weight: 700;
+      background: linear-gradient(to right, #ffffff, #b5ffff, #dbcaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      animation: fadeIn 1s ease;
+    }
+
+    .profile-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid #57dfdf;
+      box-shadow: 0 18px 30px -8px #1b4f4f, 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+      margin: 25px 0 15px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s;
+      animation: floatEntrance 1s ease-out, floatSoft 5s infinite 1s;
+    }
+
+    .profile-img:hover {
+      transform: scale(1.08) rotate(3deg);
+      box-shadow: 0 28px 35px -8px #20a0a0, 0 0 0 4px rgba(100, 255, 255, 0.6);
+      border-color: #afffef;
+    }
+
+    @keyframes floatEntrance {
+      0% { opacity: 0; transform: translateY(30px) scale(0.9); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes floatSoft {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
+
+    .typing {
+      font-size: 1.6rem;
+      border-right: 3px solid #5ad4d4;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      max-width: fit-content;
+      animation: typing 4s steps(40, end) forwards, blink .8s step-end infinite, fadeIn 1.4s;
+      background: linear-gradient(145deg, #daf5ff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 400;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    /* ---------- SECTIONS + CARD ANIMATIONS ---------- */
+    .section {
+      display: block;
+      padding: 1rem 0 2rem;
+      animation: fadeSlideUp 0.7s ease-out backwards;
+    }
+
+    #personal { animation-delay: 0.1s; }
+    #objective { animation-delay: 0.2s; }
+    #skills { animation-delay: 0.3s; }
+    #projects { animation-delay: 0.4s; }
+    #certificates { animation-delay: 0.5s; }
+    #contact { animation-delay: 0.6s; }
+
+    @keyframes fadeSlideUp {
+      0% { opacity: 0; transform: translateY(24px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    .card {
+      background: rgba(18, 38, 48, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 210, 210, 0.3);
+      border-radius: 2.5rem;
+      padding: 2.5rem 2.8rem;
+      box-shadow: 0 30px 45px -20px #00161f, 0 0 0 1px rgba(0, 255, 255, 0.15) inset;
+      transition: transform 0.3s ease, box-shadow 0.4s ease;
+      margin-bottom: 2.5rem;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 40px 50px -18px #0a5f5f;
+      border-color: rgba(27, 74, 74, 0.45);
+    }
+
+    .card h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      border-left: 7px solid #3fc5c5;
+      padding-left: 1.5rem;
+      background: linear-gradient(to right, #ffffff, #b2ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .skills span {
+      display: inline-block;
+      padding: 0.8rem 1.8rem;
+      margin: 0.5rem 0.8rem 0.5rem 0;
+      border: 1.5px solid rgba(0, 220, 220, 0.7);
+      border-radius: 40px;
+      background: rgba(0, 50, 55, 0.5);
+      backdrop-filter: blur(5px);
+      font-weight: 500;
+      transition: all 0.25s ease;
+    }
+
+    .skills span:hover {
+      background: #1f8f8f;
+      border-color: #a6ffff;
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 10px 18px -6px #2fafaf;
+    }
+
+    .project {
+      background: rgba(10, 35, 40, 0.8);
+      padding: 1.3rem 1.8rem;
+      margin: 1rem 0;
+      border-radius: 2rem;
+      border-left: 10px solid #2fafaf;
+      font-size: 1.3rem;
+      backdrop-filter: blur(5px);
+      transition: all 0.3s ease;
+    }
+
+    .project:hover {
+      background: #1a8787;
+      border-left-color: #ffea9e;
+      color: white;
+      transform: translateX(12px) scale(1.01);
+      box-shadow: 0 15px 20px -10px #166161;
+    }
+
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .cert-item {
+      background: rgba(0, 40, 45, 0.7);
+      backdrop-filter: blur(6px);
+      border-radius: 2rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      border: 1px solid rgba(0, 230, 230, 0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 18px 25px -12px #05262e;
+    }
+
+    .cert-item:hover {
+      transform: scale(1.03) translateY(-8px);
+      border-color: #9fffff;
+      background: rgba(20, 80, 85, 0.8);
+      box-shadow: 0 30px 30px -10px #208787;
+    }
+
+    .cert-icon {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .cert-item:hover .cert-icon {
+      transform: rotate(5deg) scale(1.1);
+    }
+
+    .cert-item h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #d6ffff;
+    }
+
+    /* ========== ENHANCED CONTACT SECTION ========== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+
+    /* Contact Methods Column */
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      background: rgba(0, 50, 55, 0.4);
+      border-radius: 2rem;
+      border: 1px solid rgba(0, 220, 220, 0.2);
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: #eef7fc;
+    }
+
+    .contact-item:hover {
+      transform: translateX(8px);
+      background: rgba(0, 180, 180, 0.25);
+      border-color: rgba(0, 255, 255, 0.5);
+      box-shadow: 0 10px 20px -8px #0ff;
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      min-width: 2.5rem;
+      text-align: center;
+    }
+
+    .contact-detail {
+      font-size: 1.1rem;
+      word-break: break-word;
+    }
+
+    .contact-label {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-bottom: 0.2rem;
+    }
+
+    /* Social Icons */
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .social-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      background: rgba(0, 70, 75, 0.5);
+      border-radius: 50%;
+      font-size: 1.8rem;
+      text-decoration: none;
+      color: white;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-5px) scale(1.1);
+      background: #1f8f8f;
+      border-color: #a6ffff;
+      box-shadow: 0 15px 20px -8px #1b6b6b;
+    }
+
+    /* Download Button */
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2rem;
+      background: linear-gradient(145deg, #1f8f8f, #136d6d);
+      border-radius: 3rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      width: fit-content;
+    }
+
+    .download-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 25px -8px #0a5f5f;
+      background: linear-gradient(145deg, #2ba0a0, #1a7a7a);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Contact Form Column */
+    .contact-form {
+      background: rgba(0, 40, 45, 0.5);
+      border-radius: 2rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(0, 220, 220, 0.3);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(0, 220, 220, 0.3);
+      border-radius: 2rem;
+      color: white;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #57dfdf;
+      background: rgba(0, 100, 100, 0.2);
+      box-shadow: 0 0 15px rgba(87, 223, 223, 0.3);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .submit-btn {
+      background: linear-gradient(145deg, #1f8f8f, #136d6d);
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 3rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -8px #0a5f5f;
+      background: linear-gradient(145deg, #2ba0a0, #1a7a7a);
+    }
+
+    /* Responsive Contact Section */
+    @media (max-width: 900px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .contact-item {
+        padding: 0.8rem 1rem;
+      }
+      .contact-icon {
+        font-size: 1.5rem;
+        min-width: 2rem;
+      }
+      .social-links {
+        justify-content: center;
+      }
+    }
+
+    /* footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 30, 40, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 60px;
+      margin: 3rem 0 1rem;
+      border: 1px solid rgba(0, 200, 200, 0.25);
+      font-weight: 300;
+      animation: fadeIn 1.5s;
+    }
+
+    @media (max-width: 700px) {
+      .hero h2 { font-size: 2.4rem; }
+      .typing { font-size: 1.2rem; white-space: normal; border-right: none; width: 100%; animation: none; }
+      .card { padding: 2rem 1.5rem; }
+      .certificates-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- RESPONSIVE FLOATING NAV -->
+  <nav>
+    <ul>
+      <li><a href="#personal">Personal</a></li>
+      <li><a href="#objective">Objective</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-left">
+      <h2>Prince Cedrick Mansueto</h2>
+      <img src="profilepic.png" class="profile-img" alt="profile" 
+           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23308888%22 /><text x=%2250%22 y=%2265%22 font-size=%2245%22 text-anchor=%22middle%22 fill=%22white%22>👤</text></svg>'">
+      <p class="typing">
+        Future Software Developer | Mobile & Web Creator
+      </p>
+    </div>
+  </section>
+
+  <!-- PERSONAL INFO SECTION -->
+  <section id="personal" class="section">
+    <div class="card">
+      <h2>👤 Personal Information</h2>
+      <p style="font-size:1.4rem; margin:1.2rem 0;">Name: Prince Cedrick D. Mansueto</p>
+      <p style="font-size:1.4rem;">Course: BS Information Technology · 3rd Year</p>
+    </div>
+  </section>
+
+  <!-- OBJECTIVE SECTION -->
+  <section id="objective" class="section">
+    <div class="card">
+      <h2>🎯 Career Objective</h2>
+      <p style="font-size:1.6rem; font-weight:300;">To become a successful Software Developer and create innovative mobile and web applications that solve real problems.</p>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills" class="section">
+    <div class="card">
+      <h2>🛠 Skills</h2>
+      <div class="skills">
+        <span>HTML5</span>
+        <span>CSS3</span>
+        <span>JavaScript</span>
+        <span>Java</span>       
+        <span>MySQL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS SECTION -->
+  <section id="projects" class="section">
+    <div class="card">
+      <h2>📂 Projects</h2>
+      <div class="project">Petshop Management System</div>
+      <div class="project">Human Rights Data Analytics System</div>
+      <div class="project">Personal Portfolio</div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES SECTION -->
+  <section id="certificates" class="section">
+    <div class="card">
+      <h2>📜 Certificates</h2>
+      <div class="certificates-grid">
+        <div class="cert-item">
+          <span class="cert-icon">🔐</span>
+          <h3>Ethical Hacker</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+        <div class="cert-item">
+          <span class="cert-icon">🛡️</span>
+          <h3>Introduction to Cybersecurity</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+        <div class="cert-item">
+          <span class="cert-icon">📊</span>
+          <h3>Data Analytics</h3>
+          <p>Coursera · 2024</p>
+        </div>
+        <div class="cert-item">
+          <span class="cert-icon">🌐</span>
+          <h3>Networking Basics</h3>
+          <p>Cisco Networking Academy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENHANCED CONTACT SECTION -->
+  <section id="contact" class="section">
+    <div class="card">
+      <h2> Get In Touch</h2>
+      
+      <div class="contact-grid">
+        <!-- Left Column: Contact Methods -->
+        <div class="contact-methods">
+          
+          <!-- Email -->
+          <a href="mailto:princecedrickmansueto@gmail.com" class="contact-item">
+            
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-detail">princecedrickmansueto@gmail.com</div>
+            </div>
+          </a>
+
+          <!-- Phone -->
+          <a href="tel:+63930802214" class="contact-item">
+           
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-detail">+63 930 802 214</div>
+            </div>
+          </a>
+
+          <!-- Location -->
+          <div class="contact-item">
+            
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-detail">Philippines</div>
+            </div>
+          </div>
+
+         
+
+          <!-- GitHub -->
+          <a href="#" class="contact-item">
+           
+            <div>
+              <div class="contact-label">GitHub</div>
+              <div class="contact-detail">https://github.com/snirpdess</div>
+            </div>
+          </a>
+
+         
+       
+        </div>
+
+        
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 · Prince Cedrick Mansueto · Portfolio · All rights reserved.
+  </footer>
+
+</div>
+
+<!-- smooth scroll on nav click -->
+<script>
+  document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href').substring(1);
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Form submission handler
+  function handleSubmit(event) {
+    event.preventDefault();
+    alert('Thank you for your message! This is a demo form. In a real implementation, this would send an email.');
+    event.target.reset();
+  }
+</script>
+
+</body>
+</html>
